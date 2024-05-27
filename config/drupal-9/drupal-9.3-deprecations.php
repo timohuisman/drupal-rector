@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use DrupalRector\Drupal8\Rector\Deprecation\ConstantToClassConstantRector;
-use DrupalRector\Drupal8\Rector\ValueObject\ConstantToClassConfiguration;
 use DrupalRector\Drupal9\Rector\Deprecation\ExtensionPathRector;
 use DrupalRector\Drupal9\Rector\Deprecation\FileBuildUriRector;
 use DrupalRector\Drupal9\Rector\Deprecation\FunctionToEntityTypeStorageMethod;
@@ -15,8 +13,10 @@ use DrupalRector\Drupal9\Rector\Deprecation\TaxonomyVocabularyGetNamesRector;
 use DrupalRector\Drupal9\Rector\ValueObject\ExtensionPathConfiguration;
 use DrupalRector\Drupal9\Rector\ValueObject\FunctionToEntityTypeStorageConfiguration;
 use DrupalRector\Drupal9\Rector\ValueObject\FunctionToFirstArgMethodConfiguration;
+use DrupalRector\Rector\Deprecation\ConstantToClassConstantRector;
 use DrupalRector\Rector\Deprecation\FunctionToServiceRector;
 use DrupalRector\Rector\Deprecation\FunctionToStaticRector;
+use DrupalRector\Rector\ValueObject\ConstantToClassConfiguration;
 use DrupalRector\Rector\ValueObject\FunctionToServiceConfiguration;
 use DrupalRector\Rector\ValueObject\FunctionToStaticConfiguration;
 use DrupalRector\Services\AddCommentService;
@@ -39,11 +39,11 @@ return static function (RectorConfig $rectorConfig): void {
 
     // Change record: https://www.drupal.org/node/3223520
     $rectorConfig->ruleWithConfiguration(FunctionToServiceRector::class, [
-        new FunctionToServiceConfiguration('file_copy', 'file.repository', 'copy'),
-        new FunctionToServiceConfiguration('file_move', 'file.repository', 'move'),
-        new FunctionToServiceConfiguration('file_save_data', 'file.repository', 'writeData'),
+        new FunctionToServiceConfiguration('9.3.0', 'file_copy', 'file.repository', 'copy'),
+        new FunctionToServiceConfiguration('9.3.0', 'file_move', 'file.repository', 'move'),
+        new FunctionToServiceConfiguration('9.3.0', 'file_save_data', 'file.repository', 'writeData'),
         // Change record: https://www.drupal.org/node/2939099
-        new FunctionToServiceConfiguration('render', 'renderer', 'render'),
+        new FunctionToServiceConfiguration('9.3.0', 'render', 'renderer', 'render'),
     ]);
 
     // Change record: https://www.drupal.org/node/3223091.
